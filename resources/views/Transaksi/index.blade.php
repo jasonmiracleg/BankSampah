@@ -7,46 +7,67 @@
             <hr class="mb-4 border-t border-black">
             <div>
                 <button type="button"
-                    class="focus:outline-none text-white bg-green-500 hover:bg-green-700 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2">Buat
-                    Transaksi</button>
+                    class="focus:outline-none text-white bg-green-500 hover:bg-green-700 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2">
+                    <a href="{{ route('transaksi.create') }}">Buat Transaksi</a></button>
             </div>
         </div>
         <div class="mt-4 mx-2">
-            <table class="w-full text-sm text-left rtl:text-right text-gray-700 border border-1">
-                <thead class="text-xs text-gray-800 uppercase bg-green-300">
-                    <tr>
-                        <th scope="col" class="px-6 py-3">
-                            Tanggal
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Keterangan
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Tipe Transaksi
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Total
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr
-                        class="odd:bg-white even:bg-gray-100 dark:odd:bg-gray-900 dark:even:bg-gray-800 border-b dark:border-gray-700">
-                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            12 Februari
-                        </th>
-                        <td class="px-6 py-4">
-                            Botol Plastik
-                        </td>
-                        <td class="px-6 py-4">
-                            Pemasukan
-                        </td>
-                        <td class="px-6 py-4">
-                            Rp 10.000
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            @if ($transactions->isEmpty())
+                <h1 class="text-2xl w-full text-center">Belum Ada Penyetoran</h1>
+            @else
+                <table class="w-full text-sm text-left rtl:text-right text-gray-700 border border-1">
+                    <thead class="text-xs text-gray-800 uppercase bg-green-300">
+                        <tr>
+                            <th scope="col" class="px-6 py-3 text-center">
+                                Tanggal
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-center">
+                                Keterangan
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-center">
+                                Tipe Transaksi
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-center">
+                                Total
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-center">
+                                Aksi
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($transactions as $transaction)
+                            <tr
+                                class="odd:bg-white even:bg-gray-100 dark:odd:bg-gray-900 dark:even:bg-gray-800 border-b dark:border-gray-700">
+                                <td scope="row" class="px-6 py-4 text-gray-900 whitespace-nowrap text-center">
+                                    {{ $transaction->created_at }}
+                                </td>
+                                <td class="px-6 py-4 text-center">
+                                    {{ $transaction->keterangan }}
+                                </td>
+                                <td class="px-6 py-4 text-center">
+                                    @if ($transaction->transaction_type == 0)
+                                        Pemasukan
+                                    @else
+                                        Pengeluaran
+                                    @endif
+                                </td>
+                                <td class="px-6 py-4 text-center">
+                                    {{ 'Rp ' . number_format($transaction->total_nominal, 2, '.', ',') }}
+                                </td>
+                                <td class="text-center">
+                                    <button type="button"
+                                        class="focus:outline-none text-white bg-blue-500 hover:bg-blue-700 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 w-20">
+                                        <a href="{{ route('transaksi.edit', $transaction) }}">Edit</a></button>
+                                    <button type="button"
+                                        class="focus:outline-none text-white bg-red-500 hover:bg-red-700 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 w-20">
+                                        <a href="{{ route('transaksi.destroy', $transaction) }}">Hapus</a></button>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            @endif
         </div>
     </div>
 @endsection

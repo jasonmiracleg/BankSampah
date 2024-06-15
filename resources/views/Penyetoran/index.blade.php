@@ -13,10 +13,10 @@
             </div>
         </div>
         <div class="mt-4 mx-2">
-            @if (!$setors)
+            @if ($setors->isEmpty())
                 <h1 class="text-2xl w-full text-center">Belum Ada Penyetoran</h1>
             @else
-                <table class="w-full text-sm text-left rtl:text-right text-gray-700 border border-1">
+                <table class="w-full text-sm text-center text-gray-700 border border-1">
                     <thead class="text-xs text-gray-800 uppercase bg-green-300">
                         <tr>
                             <th scope="col" class="px-6 py-3">
@@ -38,8 +38,8 @@
                             <tr
                                 class="odd:bg-white even:bg-gray-100 dark:odd:bg-gray-900 dark:even:bg-gray-800 border-b dark:border-gray-700">
                                 <td scope="row"
-                                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    {{ $setor->created_at }}
+                                    class="px-6 py-4 text-gray-900 whitespace-nowrap">
+                                    {{ $setor->created_at->format('Y-m-d') }}
                                 </td>
                                 <td class="px-6 py-4">
                                     {{ $setor->recipient->name }}

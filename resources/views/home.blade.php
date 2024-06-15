@@ -44,16 +44,16 @@
                     </colgroup>
                     <thead class="text-xs text-gray-800 uppercase bg-green-300">
                         <tr>
-                            <th scope="col" class="px-6 py-3">
+                            <th scope="col" class="px-6 py-3 text-center">
                                 Tanggal
                             </th>
-                            <th scope="col" class="px-6 py-3">
+                            <th scope="col" class="px-6 py-3 text-center">
                                 Penerima
                             </th>
-                            <th scope="col" class="px-6 py-3">
+                            <th scope="col" class="px-6 py-3 text-center">
                                 Nama Barang
                             </th>
-                            <th scope="col" class="px-6 py-3">
+                            <th scope="col" class="px-6 py-3 text-center">
                                 Berat Barang
                             </th>
                         </tr>
@@ -61,16 +61,16 @@
                     <tbody>
                         <tr
                             class="odd:bg-white even:bg-gray-100 dark:odd:bg-gray-900 dark:even:bg-gray-800 border-b dark:border-gray-700">
-                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            <td scope="row" class="px-6 py-4 text-gray-900 whitespace-nowrap text-center">
                                 12 Februari
-                            </th>
-                            <td class="px-6 py-4">
+                            </td>
+                            <td class="px-6 py-4 text-center">
                                 Jason
                             </td>
-                            <td class="px-6 py-4">
+                            <td class="px-6 py-4 text-center">
                                 Botol Plastik
                             </td>
-                            <td class="px-6 py-4">
+                            <td class="px-6 py-4 text-center">
                                 0.2
                             </td>
                         </tr>
@@ -89,16 +89,16 @@
                     </colgroup>
                     <thead class="text-xs text-gray-800 uppercase bg-green-300">
                         <tr>
-                            <th scope="col" class="px-6 py-3">
+                            <th scope="col" class="px-6 py-3 text-center">
                                 Tanggal
                             </th>
-                            <th scope="col" class="px-6 py-3">
+                            <th scope="col" class="px-6 py-3 text-center">
                                 Keterangan
                             </th>
-                            <th scope="col" class="px-6 py-3">
+                            <th scope="col" class="px-6 py-3 text-center">
                                 Tipe Transaksi
                             </th>
-                            <th scope="col" class="px-6 py-3">
+                            <th scope="col" class="px-6 py-3 text-center">
                                 Total
                             </th>
                         </tr>
@@ -106,17 +106,16 @@
                     <tbody>
                         <tr
                             class="odd:bg-white even:bg-gray-100 dark:odd:bg-gray-900 dark:even:bg-gray-800 border-b dark:border-gray-700">
-                            <th scope="row"
-                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            <td scope="row" class="px-6 py-4 text-gray-900 whitespace-nowrap text-center">
                                 12 Februari
-                            </th>
-                            <td class="px-6 py-4">
+                            </td>
+                            <td class="px-6 py-4 text-center">
                                 Botol Plastik
                             </td>
-                            <td class="px-6 py-4">
+                            <td class="px-6 py-4 text-center">
                                 Pemasukan
                             </td>
-                            <td class="px-6 py-4">
+                            <td class="px-6 py-4 text-center">
                                 Rp 10.000
                             </td>
                         </tr>

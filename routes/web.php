@@ -19,4 +19,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/buat/penyetoran', [SetorController::class, 'create'])->name('penyetoran.create');
     Route::post('/store/penyetoran', [SetorController::class, 'store'])->name('penyetoran.store');
     Route::get('/transaksi', [TransactionController::class, 'index'])->name('transaksi');
+    Route::get('/buat/transaksi', [TransactionController::class, 'create'])->name('transaksi.create');
+    Route::post('/store/transaksi', [TransactionController::class, 'store'])->name('transaksi.store');
+    Route::get('/edit/{transaction}/transaksi', [TransactionController::class, 'edit'])->name('transaksi.edit');
+    Route::post('/update/{transaction}/transaksi', [TransactionController::class, 'update'])->name('transaksi.update');
+    Route::get('/delete/{transaction}/transaksi', [TransactionController::class, 'destroy'])->name('transaksi.destroy');
 });
