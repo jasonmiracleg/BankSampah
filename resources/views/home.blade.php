@@ -32,7 +32,7 @@
             </div>
         </div>
         <div class="px-2">
-            <h1 class="font-semibold text-2xl">Transaksi Terakhir</h1>
+            <h1 class="font-semibold text-2xl">Penyetoran</h1>
             <hr class="mb-4 border-t border-black">
             <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
                 <table class="w-full text-sm text-left rtl:text-right text-gray-700">
@@ -57,16 +57,16 @@
                             class="odd:bg-white even:bg-gray-100 dark:odd:bg-gray-900 dark:even:bg-gray-800 border-b dark:border-gray-700">
                             <th scope="row"
                                 class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                Apple MacBook Pro 17"
+                                12 Februari
                             </th>
                             <td class="px-6 py-4">
-                                Silver
+                                Botol Plastik
                             </td>
                             <td class="px-6 py-4">
-                                Laptop
+                                Pemasukan
                             </td>
                             <td class="px-6 py-4">
-                                $2999
+                                Rp 10.000
                             </td>
                         </tr>
                     </tbody>
