@@ -31,8 +31,8 @@
                 @enderror
             </div>
             <div class="mb-5">
-                <label for="total" class="block mb-2 text-sm font-medium text-gray-900">Total Nominal (Rp)</label>
-                <input type="number" name="total"
+                <label for="total_nominal" class="block mb-2 text-sm font-medium text-gray-900">Total Nominal (Rp)</label>
+                <input type="number" name="total_nominal"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                     placeholder="100000" required />
                 @error('transaction_type')

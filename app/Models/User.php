@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -16,12 +17,23 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
 
+    protected $guarded = ['id'];
+
+    public function sent(): HasMany
+    {
+        return $this->hasMany(Setor::class, 'sender_id', 'id');
+    }
+
+    public function recieved(): HasMany
+    {
+        return $this->hasMany(Setor::class, 'recipient_id, id');
+    }
+
+    public function transacted(): HasMany
+    {
+        return $this->hasMany(User::class, 'user_id', 'id');
+    }
     /**
      * The attributes that should be hidden for serialization.
      *
