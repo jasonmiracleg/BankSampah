@@ -6,10 +6,11 @@
             <h1 class="font-semibold text-2xl">Riwayat Penyetoran</h1>
             <hr class="mb-4 border-t border-black">
             <div>
-                <button type="button"
-                    class="focus:outline-none text-white bg-green-500 hover:bg-green-700 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2"><a
-                        href="{{ route('penyetoran.create') }}">Lakukan
-                        Setor</a></button>
+                <a href="{{ route('penyetoran.create') }}">
+                    <button type="button"
+                        class="focus:outline-none text-white bg-green-500 hover:bg-green-700 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2">Lakukan
+                        Setor</button>
+                </a>
             </div>
         </div>
         <div class="mt-4 mx-2">
@@ -37,8 +38,7 @@
                         @foreach ($setors as $setor)
                             <tr
                                 class="odd:bg-white even:bg-gray-100 dark:odd:bg-gray-900 dark:even:bg-gray-800 border-b dark:border-gray-700">
-                                <td scope="row"
-                                    class="px-6 py-4 text-gray-900 whitespace-nowrap">
+                                <td scope="row" class="px-6 py-4 text-gray-900 whitespace-nowrap">
                                     {{ $setor->created_at->format('Y-m-d') }}
                                 </td>
                                 <td class="px-6 py-4">
