@@ -16,9 +16,19 @@ class DatabaseSeeder extends Seeder
         // User::factory(10)->create();
 
         User::create([
-            'name' => 'Jason',
+            'name' => 'Admin',
             'username' => 'AdminBankSampah',
             'password' => bcrypt('admin123'),
+            'saldo' => 0,
+            'total_income' => 0,
+            'total_outcome' => 0,
+            'is_admin' => '1'
+        ]);
+
+        User::create([
+            'name' => 'Jason',
+            'username' => 'jasonmiracle_',
+            'password' => bcrypt('jason123'),
             'saldo' => 0,
             'total_income' => 0,
             'total_outcome' => 0,

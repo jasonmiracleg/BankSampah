@@ -8,7 +8,7 @@
                     <div class="p-4">
                         <h2 class="font-bold">Saldo</h2>
                         <hr class="border-t-2 my-1">
-                        <h3 class="font-semibold">Rp 17.000</h3>
+                        <h3 class="font-semibold">{{'Rp ' . number_format(auth()->user()->saldo, 2, '.', ',') }}</h3>
                     </div>
                 </a>
             </div>
@@ -17,7 +17,7 @@
                     <div class="p-4">
                         <h2 class="font-bold">Pemasukan</h2>
                         <hr class="border-t-2 my-1">
-                        <h3 class="font-semibold">Rp 17.000</h3>
+                        <h3 class="font-semibold">{{'Rp ' . number_format(auth()->user()->total_income, 2, '.', ',') }}</h3>
                     </div>
                 </a>
             </div>
@@ -26,16 +26,67 @@
                     <div class="p-4">
                         <h2 class="font-bold">Pengeluaran</h2>
                         <hr class="border-t-2 my-1">
-                        <h3 class="font-semibold">Rp 17.000</h3>
+                        <h3 class="font-semibold">{{'Rp ' . number_format(auth()->user()->total_outcome, 2, '.', ',') }}</h3>
                     </div>
                 </a>
             </div>
         </div>
         <div class="px-2">
-            <h1 class="font-semibold text-2xl">Penyetoran</h1>
+            <h1 class="font-semibold text-2xl">Penyetoran Terakhir</h1>
+            <hr class="mb-4 border-t border-black">
+            <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+                <table class="w-full text-sm text-left rtl:text-right text-gray-700 border border-1">
+                    <colgroup>
+                        <col style="width: 25%;">
+                        <col style="width: 25%;">
+                        <col style="width: 25%;">
+                        <col style="width: 25%;">
+                    </colgroup>
+                    <thead class="text-xs text-gray-800 uppercase bg-green-300">
+                        <tr>
+                            <th scope="col" class="px-6 py-3">
+                                Tanggal
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Penerima
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Nama Barang
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Berat Barang
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr
+                            class="odd:bg-white even:bg-gray-100 dark:odd:bg-gray-900 dark:even:bg-gray-800 border-b dark:border-gray-700">
+                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                12 Februari
+                            </th>
+                            <td class="px-6 py-4">
+                                Jason
+                            </td>
+                            <td class="px-6 py-4">
+                                Botol Plastik
+                            </td>
+                            <td class="px-6 py-4">
+                                0.2
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <h1 class="font-semibold text-2xl mt-8">Transaksi Terakhir</h1>
             <hr class="mb-4 border-t border-black">
             <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
                 <table class="w-full text-sm text-left rtl:text-right text-gray-700">
+                    <colgroup>
+                        <col style="width: 25%;">
+                        <col style="width: 25%;">
+                        <col style="width: 25%;">
+                        <col style="width: 25%;">
+                    </colgroup>
                     <thead class="text-xs text-gray-800 uppercase bg-green-300">
                         <tr>
                             <th scope="col" class="px-6 py-3">

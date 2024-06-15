@@ -31,15 +31,15 @@
                     <ul
                         class="navbar-navfont-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-transparent">
                         <li>
-                            <a href="#"
+                            <a href="{{ route('home') }}"
                                 class="block py-2 px-3 md:text-white bg-blue-700 rounded font-semibold md:bg-transparent md:p-0 nav-link md:hover:text-gray-200">Beranda</a>
                         </li>
                         <li>
-                            <a href="#"
+                            <a href="{{ route('penyetoran') }}"
                                 class="block py-2 px-3 md:text-white rounded hover:bg-gray-100 font-semibold md:hover:bg-transparent md:border-0 md:hover:text-gray-200 md:p-0 nav-link">Penyetoran</a>
                         </li>
                         <li>
-                            <a href="#"
+                            <a href="{{ route('transaksi') }}"
                                 class="block py-2 px-3 md:text-white rounded hover:bg-gray-100 font-semibold md:hover:bg-transparent md:border-0 md:hover:text-gray-200 md:p-0 nav-link">Transaksi</a>
                         </li>
                         <li>

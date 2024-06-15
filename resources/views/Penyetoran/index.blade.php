@@ -7,46 +7,54 @@
             <hr class="mb-4 border-t border-black">
             <div>
                 <button type="button"
-                    class="focus:outline-none text-white bg-green-500 hover:bg-green-700 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2">Lakukan
-                    Setor</button>
+                    class="focus:outline-none text-white bg-green-500 hover:bg-green-700 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2"><a
+                        href="{{ route('penyetoran.create') }}">Lakukan
+                        Setor</a></button>
             </div>
         </div>
         <div class="mt-4 mx-2">
-            <table class="w-full text-sm text-left rtl:text-right text-gray-700 border border-1">
-                <thead class="text-xs text-gray-800 uppercase bg-green-300">
-                    <tr>
-                        <th scope="col" class="px-6 py-3">
-                            Tanggal
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Penerima
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Nama Barang
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Berat Barang
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr
-                        class="odd:bg-white even:bg-gray-100 dark:odd:bg-gray-900 dark:even:bg-gray-800 border-b dark:border-gray-700">
-                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            12 Februari
-                        </th>
-                        <td class="px-6 py-4">
-                            Jason
-                        </td>
-                        <td class="px-6 py-4">
-                            Botol Plastik
-                        </td>
-                        <td class="px-6 py-4">
-                            0.2
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            @if (!$setors)
+                <h1 class="text-2xl w-full text-center">Belum Ada Penyetoran</h1>
+            @else
+                <table class="w-full text-sm text-left rtl:text-right text-gray-700 border border-1">
+                    <thead class="text-xs text-gray-800 uppercase bg-green-300">
+                        <tr>
+                            <th scope="col" class="px-6 py-3">
+                                Tanggal
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Penerima
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Nama Barang
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Berat Barang
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($setors as $setor)
+                            <tr
+                                class="odd:bg-white even:bg-gray-100 dark:odd:bg-gray-900 dark:even:bg-gray-800 border-b dark:border-gray-700">
+                                <td scope="row"
+                                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                    {{ $setor->created_at }}
+                                </td>
+                                <td class="px-6 py-4">
+                                    {{ $setor->recipient->name }}
+                                </td>
+                                <td class="px-6 py-4">
+                                    {{ $setor->product_name }}
+                                </td>
+                                <td class="px-6 py-4">
+                                    {{ $setor->weight }}
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            @endif
         </div>
     </div>
 @endsection

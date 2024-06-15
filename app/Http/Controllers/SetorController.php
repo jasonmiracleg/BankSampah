@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Setor;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class SetorController extends Controller
 {
@@ -12,7 +14,8 @@ class SetorController extends Controller
      */
     public function index()
     {
-        //
+        $setors = Setor::all();
+        return view('Penyetoran.index', ['setors' => $setors]);
     }
 
     /**
@@ -20,7 +23,8 @@ class SetorController extends Controller
      */
     public function create()
     {
-        //
+        $users = User::all();
+        return view('Penyetoran.create', ['users' => $users]);
     }
 
     /**
@@ -28,7 +32,26 @@ class SetorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'product_name' => ['required'],
+            'weight' => ['required'],
+        ], [
+            'product_name.required' => 'Nama Barang harus diisi.',
+            'weight.required' => 'Berat Barang harus diisi.',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        Setor::create([
+            'product_name' => $request->product_name,
+            'weight' => $request->weight,
+            'recipient_id' => $request->recipient,
+            'sender_id' => $request->sender
+        ]);
+
+        return redirect()->route('penyetoran');
     }
 
     /**
