@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="flex items-center justify-center flex-cols h-screen">
-        <form class="w-full max-w-md mx-auto" method="POST">
+        <form class="w-full max-w-md mx-auto" method="POST" action="{{ route('login') }}">
             @csrf
             <h1 class="mb-8 font-bold text-2xl">Login</h1>
             <div class="mb-5">
@@ -30,7 +30,7 @@
             <div class="flex flex-col items-center md:flex-row md:justify-between md:items-center w-full">
                 <button type="submit"
                     class="text-white bg-green-300 focus:ring-2 focus:outline-none focus:ring-green-400 hover:bg-green-500 font-medium rounded-lg text-sm w-full md:w-auto px-5 py-2.5 text-center">Login</button>
-                <p class="mt-2 md:mt-0"><a href="" class="text-blue-600 underline">Belum Punya Akun?</a></p>
+                <p class="mt-2 md:mt-0"><a href="{{ route('register.page') }}" class="text-blue-600 underline">Belum Punya Akun?</a></p>
             </div>            
         </form>
     </div>
