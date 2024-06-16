@@ -14,14 +14,16 @@ class SetorController extends Controller
      */
     public function index()
     {
-        $setors = Setor::all();
+        $setors = Setor::where('sender_id', auth()->id())
+            ->orWhere('recipient_id', auth()->id())
+            ->get();
+        $users = User::all();
+
         $totalSaldo = 0;
 
-        foreach($setors as $setor){
-            $totalSaldo += $setor->weight;
+        foreach ($users as $user) {
+            $totalSaldo += $user->saldo;
         }
-
-        $totalSaldo = $totalSaldo/1000;
 
         return view('Penyetoran.index', ['setors' => $setors, 'totalSaldo' => $totalSaldo]);
     }

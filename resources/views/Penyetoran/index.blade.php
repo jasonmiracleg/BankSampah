@@ -9,7 +9,7 @@
                         <div class="p-4">
                             <h2 class="font-bold">Saldo Bank Sampah</h2>
                             <hr class="border-t-2 my-1">
-                            <h3 class="font-semibold">{{ $totalSaldo }} kg </h3>
+                            <h3 class="font-semibold">{{ 'Rp ' . number_format($totalSaldo, 2, '.', ',') }}</h3>
                         </div>
                     </a>
                 </div>

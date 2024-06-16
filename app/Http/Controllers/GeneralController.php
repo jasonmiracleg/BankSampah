@@ -20,6 +20,11 @@ class GeneralController extends Controller
             ->take(5)
             ->get();
 
+        if (auth()->user()->is_admin == 1) {
+            $latestTransactions = Transaction::latest()->take(5)->get();
+            $latestSetors = Setor::latest()->take(5)->get();
+        }
+
         return view('home', compact('latestTransactions', 'latestSetors'));
     }
 }

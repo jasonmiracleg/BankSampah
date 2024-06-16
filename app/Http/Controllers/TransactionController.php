@@ -11,7 +11,7 @@ class TransactionController extends Controller
 {
     public function index()
     {
-        $transactions = Transaction::all();
+        $transactions = Transaction::where('user_id', auth()->id())->get();
         return view('Transaksi.index', ['transactions' => $transactions]);
     }
 
