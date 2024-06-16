@@ -6,7 +6,7 @@
             <div class="w-full p-2">
                 <a class="block bg-blue-500 text-white rounded-lg shadow mb-4 no-underline">
                     <div class="p-4">
-                        <h2 class="font-bold">Saldo</h2>
+                        <h2 class="font-bold">Saldo Nasabah</h2>
                         <hr class="border-t-2 my-1">
                         <h3 class="font-semibold">{{ 'Rp ' . number_format(auth()->user()->saldo, 2, '.', ',') }}</h3>
                     </div>
@@ -34,9 +34,9 @@
             </div>
         </div>
         <div class="px-2">
+            <h1 class="font-semibold text-2xl">Penyetoran Terakhir</h1>
+            <hr class="mb-4 border-t border-black">
             @if (!$latestSetors->isEmpty())
-                <h1 class="font-semibold text-2xl">Penyetoran Terakhir</h1>
-                <hr class="mb-4 border-t border-black">
                 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
                     <table class="w-full text-sm text-left rtl:text-right text-gray-700 border border-1">
                         <colgroup>
@@ -82,10 +82,12 @@
                         </tbody>
                     </table>
                 </div>
+            @else
+                <h1 class="text-2xl w-full text-center">Belum Ada Penyetoran</h1>
             @endif
+            <h1 class="font-semibold text-2xl mt-8">Transaksi Terakhir</h1>
+            <hr class="mb-4 border-t border-black">
             @if (!$latestTransactions->isEmpty())
-                <h1 class="font-semibold text-2xl mt-8">Transaksi Terakhir</h1>
-                <hr class="mb-4 border-t border-black">
                 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
                     <table class="w-full text-sm text-left rtl:text-right text-gray-700">
                         <colgroup>
@@ -135,6 +137,8 @@
                         </tbody>
                     </table>
                 </div>
+            @else
+                <h1 class="text-2xl w-full text-center">Belum Ada Transaksi</h1>
             @endif
         </div>
     </div>

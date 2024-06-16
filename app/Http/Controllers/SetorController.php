@@ -15,7 +15,15 @@ class SetorController extends Controller
     public function index()
     {
         $setors = Setor::all();
-        return view('Penyetoran.index', ['setors' => $setors]);
+        $totalSaldo = 0;
+
+        foreach($setors as $setor){
+            $totalSaldo += $setor->weight;
+        }
+
+        $totalSaldo = $totalSaldo/1000;
+
+        return view('Penyetoran.index', ['setors' => $setors, 'totalSaldo' => $totalSaldo]);
     }
 
     /**

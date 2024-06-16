@@ -19,7 +19,7 @@ return new class extends Migration
             $table->unsignedBigInteger('sender_id')->index();
             $table->foreign('sender_id')->on('users')->references('id')->onUpdate('cascade');
             $table->string('product_name');
-            $table->string('weight');
+            $table->bigInteger('weight');
         });
     }
 

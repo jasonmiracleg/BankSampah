@@ -15,7 +15,7 @@
         </div>
         <div class="mt-4 mx-2">
             @if ($transactions->isEmpty())
-                <h1 class="text-2xl w-full text-center">Belum Ada Penyetoran</h1>
+                <h1 class="text-2xl w-full text-center">Belum Ada Transaksi</h1>
             @else
                 <table class="w-full text-sm text-left rtl:text-right text-gray-700 border border-1">
                     <thead class="text-xs text-gray-800 uppercase bg-green-300">

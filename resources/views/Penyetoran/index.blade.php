@@ -3,6 +3,17 @@
 @section('content')
     <div class="max-w-screen-xl mx-auto p-2 mt-2">
         <div class="mt-16 mx-2">
+            <div class="pt-6">
+                <div class="md:w-1/4 w-full">
+                    <a class="block bg-blue-500 text-white rounded-lg shadow mb-4 no-underline">
+                        <div class="p-4">
+                            <h2 class="font-bold">Saldo Bank Sampah</h2>
+                            <hr class="border-t-2 my-1">
+                            <h3 class="font-semibold">{{ $totalSaldo }} kg </h3>
+                        </div>
+                    </a>
+                </div>
+            </div>
             <h1 class="font-semibold text-2xl">Riwayat Penyetoran</h1>
             <hr class="mb-4 border-t border-black">
             <div>

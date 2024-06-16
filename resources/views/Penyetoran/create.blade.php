@@ -17,8 +17,8 @@
                 @enderror
             </div>
             <div class="mb-5">
-                <label for="weight" class="block mb-2 text-sm font-medium text-gray-900">Berat Barang</label>
-                <input type="string" name="weight"
+                <label for="weight" class="block mb-2 text-sm font-medium text-gray-900">Berat Barang (Gram)</label>
+                <input type="number" name="weight"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                     placeholder="Masukan Berat Barang" />
                 @error('weight')
