@@ -25,7 +25,7 @@ class User extends Authenticatable
         return $this->hasMany(Setor::class, 'sender_id', 'id');
     }
 
-    public function recieved(): HasMany
+    public function received(): HasMany
     {
         return $this->hasMany(Setor::class, 'recipient_id, id');
     }

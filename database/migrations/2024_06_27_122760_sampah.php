@@ -11,13 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('setors', function (Blueprint $table) {
+        Schema::create('sampahs', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('product_name');
-            $table->bigInteger('weight');
-            $table->enum('is_sold', ['0', '1'])->default('0'); // 0 : not sold, 1 is sold
-            $table->enum('is_withdrawn', ['0', '1'])->default('0'); // 0 : not withdrawn, 1 is withdrawn
+            $table->string('garbage_type');
+            $table->unsignedBigInteger('category_id')->index();
+            $table->foreign('category_id')->on('categories')->references('id')->onUpdate('cascade');
+            $table->integer('price');
+            $table->string('satuan')->default('KG');
         });
     }
 
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('setors');
+        Schema::dropIfExists('Sampah');
     }
 };

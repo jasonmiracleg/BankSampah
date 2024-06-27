@@ -20,4 +20,8 @@ class Setor extends Model
     {
         return $this->belongsTo(User::class, 'recipient_id', 'id');
     }
+    public function detailGarbage(): BelongsTo
+    {
+        return $this->belongsTo(Sampah::class, 'sampah_id', 'id');
+    }
 }
