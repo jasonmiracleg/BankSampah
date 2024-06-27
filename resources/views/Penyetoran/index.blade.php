@@ -60,32 +60,44 @@
                                     @endif
                                 </td>
                                 <td class="px-6 py-4">
-                                    {{ 'Rp ' . number_format($setor->detailGarbage->price*$setor->weight, 2, '.', ',') }}
+                                    {{ 'Rp ' . number_format($setor->detailGarbage->price * $setor->weight, 2, '.', ',') }}
                                 </td>
                                 <td class="px-6 py-4 flex flex-col">
-                                    <input type="submit"
-                                        class="focus:outline-none text-white bg-red-500 font-medium rounded-lg text-sm px-3 py-2.5 me-2 mb-2"
-                                        value="Belum Terjual">
-                                    <input type="submit"
-                                        class="focus:outline-none text-white bg-green-500 font-medium rounded-lg text-sm py-2.5 me-2 mb-2"
-                                        value="Sudah Ditarik">
+                                    @if ($setor->is_sold == 0)
+                                        <input type="submit"
+                                            class="focus:outline-none text-white bg-red-500 font-medium rounded-lg text-sm px-3 py-2.5 me-2 mb-2"
+                                            value="Belum Terjual">
+                                    @else
+                                        <input type="submit"
+                                            class="focus:outline-none text-white bg-green-500 font-medium rounded-lg text-sm px-3 py-2.5 me-2 mb-2"
+                                            value="Sudah Terjual">
+                                    @endif
+                                    @if ($setor->is_withdrawn == 0)
+                                        <input type="submit"
+                                            class="focus:outline-none text-white bg-red-500 font-medium rounded-lg text-sm py-2.5 me-2 mb-2"
+                                            value="Belum Ditarik">
+                                    @else
+                                        <input type="submit"
+                                            class="focus:outline-none text-white bg-green-500 font-medium rounded-lg text-sm py-2.5 me-2 mb-2"
+                                            value="Sudah Ditarik">
+                                    @endif
                                 </td>
                                 <td>
-                                    <div class="py-2 md:py-0">
-                                        <a href="{{ route('transaksi.edit', $setor) }}">
+                                    <div class="pt-2 md:flex-row">
+                                        <a href="{{ route('penyetoran.edit', $setor) }}">
                                             <button type="button"
-                                                class="focus:outline-none text-white bg-blue-500 hover:bg-blue-700 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 w-20">
+                                                class="focus:outline-none text-white bg-blue-500 hover:bg-blue-700 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 w-32">
                                                 Edit</button>
                                         </a>
                                         <a href="{{ route('transaksi.edit', $setor) }}">
                                             <button type="button"
-                                                class="focus:outline-none text-white bg-blue-500 hover:bg-blue-700 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 w-20">
-                                                Jual</button>
+                                                class="focus:outline-none text-white bg-red-500 hover:bg-red-700 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 w-32">
+                                                Tarik Saldo</button>
                                         </a>
                                         <a href="{{ route('transaksi.edit', $setor) }}">
                                             <button type="button"
-                                                class="focus:outline-none text-white bg-blue-500 hover:bg-blue-700 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 w-20">
-                                                Tarik</button>
+                                                class="focus:outline-none text-white bg-green-500 hover:bg-green-700 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 w-32">
+                                                Jual Sampah</button>
                                         </a>
                                     </div>
                                 </td>
@@ -96,4 +108,9 @@
             @endif
         </div>
     </div>
+    <script>
+        function checkSelling() {
+
+        }
+    </script>
 @endsection

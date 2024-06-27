@@ -31,7 +31,7 @@ class SetorController extends Controller
      */
     public function create()
     {
-        $users = User::where('is_admin', '0')->get();;
+        $users = User::where('is_admin', '0')->get();
         $garbages = Sampah::all();
         return view('Penyetoran.create', ['users' => $users, 'garbages' => $garbages]);
     }
@@ -73,7 +73,10 @@ class SetorController extends Controller
      */
     public function edit(Setor $setor)
     {
-        //
+        $setorEdit = Setor::where('id', $setor->id)->first();
+        $users = User::where('is_admin', '0')->get();
+        $garbages = Sampah::all();
+        return view('Penyetoran.edit', compact('setorEdit', 'users', 'garbages'));
     }
 
     /**
@@ -81,6 +84,12 @@ class SetorController extends Controller
      */
     public function update(Request $request, Setor $setor)
     {
-        //
+        $setor->update([
+            'weight' => $request->quantity,
+            'sender_id' => $request->sender,
+            'garbage_id' => $request->garbage
+        ]);
+
+        return redirect()->route('penyetoran');
     }
 }
