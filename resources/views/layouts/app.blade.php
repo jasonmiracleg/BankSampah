@@ -51,6 +51,12 @@
                             <a href="{{ route('transaksi') }}"
                                 class="block py-2 px-3 md:text-white rounded hover:bg-gray-100 font-semibold md:hover:bg-transparent md:border-0 md:hover:text-gray-200 md:p-0 nav-link">Transaksi</a>
                         </li>
+                        @if (auth()->user()->is_admin == 1)
+                            <li>
+                                <a href="{{ route('data.nasabah') }}"
+                                    class="block py-2 px-3 md:text-white rounded hover:bg-gray-100 font-semibold md:hover:bg-transparent md:border-0 md:hover:text-gray-200 md:p-0 nav-link">Nasabah</a>
+                            </li>
+                        @endif
                         <li>
                             <button id="dropdownNavbarLink" data-dropdown-toggle="dropdownNavbar"
                                 class="flex items-center justify-between w-full py-2 px-3 md:text-white font-semibold rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-gray-200 md:p-0 md:w-auto">

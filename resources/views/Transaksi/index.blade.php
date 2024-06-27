@@ -34,9 +34,11 @@
                             <th scope="col" class="px-6 py-3 text-center">
                                 Total
                             </th>
-                            <th scope="col" class="px-6 py-3 text-center">
-                                Aksi
-                            </th>
+                            @if (auth()->user()->is_admin == '1')
+                                <th scope="col" class="px-6 py-3 text-center">
+                                    Aksi
+                                </th>
+                            @endif
                         </tr>
                     </thead>
                     <tbody>
@@ -59,18 +61,23 @@
                                 <td class="px-6 py-4 text-center">
                                     {{ 'Rp ' . number_format($transaction->total_nominal, 2, '.', ',') }}
                                 </td>
-                                <td class="text-center">
-                                    <a href="{{ route('transaksi.edit', $transaction) }}">
-                                        <button type="button"
-                                            class="focus:outline-none text-white bg-blue-500 hover:bg-blue-700 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 w-20">
-                                            Edit</button>
-                                    </a>
-                                </td>
+                                @if (auth()->user()->is_admin == '1')
+                                    <td class="text-center">
+                                        <a href="{{ route('transaksi.edit', $transaction) }}">
+                                            <button type="button"
+                                                class="focus:outline-none text-white bg-blue-500 hover:bg-blue-700 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 w-20">
+                                                Edit</button>
+                                        </a>
+                                    </td>
+                                @endif
                             </tr>
                         @endforeach
                     </tbody>
                 </table>
             @endif
+        </div>
+        <div class="mt-4 mx-2">
+            {{ $transactions->links() }} <!-- Pagination links -->
         </div>
     </div>
 @endsection
