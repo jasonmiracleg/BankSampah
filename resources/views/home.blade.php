@@ -3,35 +3,69 @@
 @section('content')
     <div class="max-w-screen-xl mx-auto p-2 mt-2">
         <div class="md:pt-16 pt-20 flex md:flex-row flex-col w-full">
-            <div class="w-full p-2">
-                <a class="block bg-blue-500 text-white rounded-lg shadow mb-4 no-underline">
-                    <div class="p-4">
-                        <h2 class="font-bold">Saldo Nasabah</h2>
-                        <hr class="border-t-2 my-1">
-                        <h3 class="font-semibold">{{ 'Rp ' . number_format(auth()->user()->saldo, 2, '.', ',') }}</h3>
-                    </div>
-                </a>
-            </div>
-            <div class="w-full p-2">
-                <a class="block bg-blue-500 text-white rounded-lg shadow mb-4 no-underline">
-                    <div class="p-4">
-                        <h2 class="font-bold">Pemasukan</h2>
-                        <hr class="border-t-2 my-1">
-                        <h3 class="font-semibold">{{ 'Rp ' . number_format(auth()->user()->total_income, 2, '.', ',') }}
-                        </h3>
-                    </div>
-                </a>
-            </div>
-            <div class="w-full p-2">
-                <a class="block bg-blue-500 text-white rounded-lg shadow mb-4 no-underline">
-                    <div class="p-4">
-                        <h2 class="font-bold">Pengeluaran</h2>
-                        <hr class="border-t-2 my-1">
-                        <h3 class="font-semibold">{{ 'Rp ' . number_format(auth()->user()->total_outcome, 2, '.', ',') }}
-                        </h3>
-                    </div>
-                </a>
-            </div>
+            @if (auth()->user()->is_admin == 1)
+                <div class="w-full p-2">
+                    <a class="block bg-blue-500 text-white rounded-lg shadow mb-4 no-underline">
+                        <div class="p-4">
+                            <h2 class="font-bold">Saldo Bank Sampah</h2>
+                            <hr class="border-t-2 my-1">
+                            <h3 class="font-semibold">{{ 'Rp ' . number_format(auth()->user()->saldo, 2, '.', ',') }}</h3>
+                        </div>
+                    </a>
+                </div>
+                <div class="w-full p-2">
+                    <a class="block bg-blue-500 text-white rounded-lg shadow mb-4 no-underline">
+                        <div class="p-4">
+                            <h2 class="font-bold">Pemasukan</h2>
+                            <hr class="border-t-2 my-1">
+                            <h3 class="font-semibold">{{ 'Rp ' . number_format(auth()->user()->total_income, 2, '.', ',') }}
+                            </h3>
+                        </div>
+                    </a>
+                </div>
+                <div class="w-full p-2">
+                    <a class="block bg-blue-500 text-white rounded-lg shadow mb-4 no-underline">
+                        <div class="p-4">
+                            <h2 class="font-bold">Pengeluaran</h2>
+                            <hr class="border-t-2 my-1">
+                            <h3 class="font-semibold">
+                                {{ 'Rp ' . number_format(auth()->user()->total_outcome, 2, '.', ',') }}
+                            </h3>
+                        </div>
+                    </a>
+                </div>
+            @else
+                <div class="w-full p-2">
+                    <a class="block bg-blue-500 text-white rounded-lg shadow mb-4 no-underline">
+                        <div class="p-4">
+                            <h2 class="font-bold">Saldo Nasabah</h2>
+                            <hr class="border-t-2 my-1">
+                            <h3 class="font-semibold">{{ 'Rp ' . number_format(auth()->user()->saldo, 2, '.', ',') }}</h3>
+                        </div>
+                    </a>
+                </div>
+                <div class="w-full p-2">
+                    <a class="block bg-blue-500 text-white rounded-lg shadow mb-4 no-underline">
+                        <div class="p-4">
+                            <h2 class="font-bold">Pemasukan</h2>
+                            <hr class="border-t-2 my-1">
+                            <h3 class="font-semibold">{{ 'Rp ' . number_format(auth()->user()->total_income, 2, '.', ',') }}
+                            </h3>
+                        </div>
+                    </a>
+                </div>
+                <div class="w-full p-2">
+                    <a class="block bg-blue-500 text-white rounded-lg shadow mb-4 no-underline">
+                        <div class="p-4">
+                            <h2 class="font-bold">Pengeluaran</h2>
+                            <hr class="border-t-2 my-1">
+                            <h3 class="font-semibold">
+                                {{ 'Rp ' . number_format(auth()->user()->total_outcome, 2, '.', ',') }}
+                            </h3>
+                        </div>
+                    </a>
+                </div>
+            @endif
         </div>
         <div class="px-2">
             <h1 class="font-semibold text-2xl">Penyetoran Terakhir</h1>

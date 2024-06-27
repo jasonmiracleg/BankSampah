@@ -14,12 +14,10 @@ return new class extends Migration
         Schema::create('setors', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->unsignedBigInteger('recipient_id')->index();
-            $table->foreign('recipient_id')->on('users')->references('id')->onUpdate('cascade');
-            $table->unsignedBigInteger('sender_id')->index();
-            $table->foreign('sender_id')->on('users')->references('id')->onUpdate('cascade');
             $table->string('product_name');
             $table->bigInteger('weight');
+            $table->enum('is_sold', ['0', '1'])->default('0'); // 0 : not sold, 1 is sold
+            $table->enum('is_withdrawn', ['0', '1'])->default('0'); // 0 : not withdrawn, 1 is withdrawn
         });
     }
 

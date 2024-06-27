@@ -63,11 +63,6 @@
                                             class="focus:outline-none text-white bg-blue-500 hover:bg-blue-700 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 w-20">
                                             Edit</button>
                                     </a>
-                                    <a href="{{ route('transaksi.destroy', $transaction) }}">
-                                        <button type="button"
-                                            class="focus:outline-none text-white bg-red-500 hover:bg-red-700 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 w-20">
-                                            Hapus</button>
-                                    </a>
                                 </td>
                             </tr>
                         @endforeach

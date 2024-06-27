@@ -68,16 +68,7 @@ class TransactionController extends Controller
         
         return redirect()->route('transaksi');
     }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Transaction $transaction)
-    {
-        $transaction->delete();
-        return redirect()->route('transaksi');
-    }
-
+    
     public function updateSaving()
     {
         $user_id = auth()->id();
