@@ -74,10 +74,11 @@
                 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
                     <table class="w-full text-sm text-left rtl:text-right text-gray-700 border border-1">
                         <colgroup>
-                            <col style="width: 25%;">
-                            <col style="width: 25%;">
-                            <col style="width: 25%;">
-                            <col style="width: 25%;">
+                            <col style="width: 20%;">
+                            <col style="width: 20%;">
+                            <col style="width: 20%;">
+                            <col style="width: 20%;">
+                            <col style="width: 20%;">
                         </colgroup>
                         <thead class="text-xs text-gray-800 uppercase bg-green-300">
                             <tr>
@@ -85,13 +86,16 @@
                                     Tanggal
                                 </th>
                                 <th scope="col" class="px-6 py-3 text-center">
-                                    Penerima
+                                    Nama Anggota
                                 </th>
                                 <th scope="col" class="px-6 py-3 text-center">
                                     Nama Barang
                                 </th>
                                 <th scope="col" class="px-6 py-3 text-center">
-                                    Berat Barang
+                                    Jumlah
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-center">
+                                    Nominal
                                 </th>
                             </tr>
                         </thead>
@@ -103,13 +107,20 @@
                                         {{ $setor->created_at }}
                                     </td>
                                     <td class="px-6 py-4 text-center">
-                                        {{ $setor->recipient->name }}
+                                        {{ $setor->sender->name }}
                                     </td>
                                     <td class="px-6 py-4 text-center">
-                                        {{ $setor->product_name }}
+                                        {{ $setor->detailGarbage->garbage_type }}
                                     </td>
                                     <td class="px-6 py-4 text-center">
-                                        {{ $setor->weight }}
+                                        @if ($setor->detailGarbage->categorized->category_name === 'Karung')
+                                            {{ $setor->weight }} Biji
+                                        @else
+                                            {{ $setor->weight }} Kg
+                                        @endif
+                                    </td>
+                                    <td class="px-6 py-4 text-center">
+                                        {{ 'Rp ' . number_format($setor->detailGarbage->price*$setor->weight, 2, '.', ',') }}
                                     </td>
                                 </tr>
                             @endforeach

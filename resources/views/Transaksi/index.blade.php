@@ -5,13 +5,15 @@
         <div class="mt-16 mx-2">
             <h1 class="font-semibold text-2xl">Riwayat Transaksi</h1>
             <hr class="mb-4 border-t border-black">
-            <div>
-                <a href="{{ route('transaksi.create') }}">
-                    <button type="button"
-                        class="focus:outline-none text-white bg-green-500 hover:bg-green-700 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2">
-                        Buat Transaksi</button>
-                </a>
-            </div>
+            @if (auth()->user()->is_admin == 1)
+                <div>
+                    <a href="{{ route('transaksi.create') }}">
+                        <button type="button"
+                            class="focus:outline-none text-white bg-green-500 hover:bg-green-700 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2">
+                            Buat Transaksi</button>
+                    </a>
+                </div>
+            @endif
         </div>
         <div class="mt-4 mx-2">
             @if ($transactions->isEmpty())

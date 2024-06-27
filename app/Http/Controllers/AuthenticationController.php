@@ -41,6 +41,7 @@ class AuthenticationController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'username' => ['required', 'string', 'min:8', 'max:25', 'unique:users'],
             'password' => ['required', 'string', 'min:8'],
+            'role' => ['required']
         ], [
             'name.required' => 'Nama harus diisi.',
             'username.required' => 'Username harus diisi.',
@@ -49,6 +50,7 @@ class AuthenticationController extends Controller
             'username.unique' => 'Username sudah digunakan.',
             'password.required' => 'Password harus diisi.',
             'password.min' => 'Password minimal 8 karakter.',
+            'role.required' => 'Status Keanggotaan harus dipilih',
         ]);
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
@@ -59,7 +61,7 @@ class AuthenticationController extends Controller
         if (empty($user)) {
             redirect()->route('register');
         }
-        return redirect()->route('login.page');
+        return redirect()->route('home');
     }
 
     protected function create(array $data)
@@ -68,7 +70,7 @@ class AuthenticationController extends Controller
             'name' => $data['name'],
             'username' => $data['username'],
             'password' => Hash::make($data['password']),
-            'is_admin' => $data['is_admin'],
+            'is_admin' => $data['role'],
             'saldo' => 0,
             'total_income' => 0,
             'total_outcome' => 0

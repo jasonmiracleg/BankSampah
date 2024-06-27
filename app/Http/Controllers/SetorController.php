@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\User;
 use App\Models\Setor;
+use App\Models\Sampah;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -14,18 +16,14 @@ class SetorController extends Controller
      */
     public function index()
     {
-        $setors = Setor::where('sender_id', auth()->id())
-            ->orWhere('recipient_id', auth()->id())
+        if (auth()->user()->is_admin == 1) {
+            $setors = Setor::all();
+        } else {
+            $setors = Setor::Where('sender_id', auth()->id())
             ->get();
-        $users = User::all();
-
-        $totalSaldo = 0;
-
-        foreach ($users as $user) {
-            $totalSaldo += $user->saldo;
         }
 
-        return view('Penyetoran.index', ['setors' => $setors, 'totalSaldo' => $totalSaldo]);
+        return view('Penyetoran.index', ['setors' => $setors]);
     }
 
     /**
@@ -33,8 +31,9 @@ class SetorController extends Controller
      */
     public function create()
     {
-        $users = User::all();
-        return view('Penyetoran.create', ['users' => $users]);
+        $users = User::where('is_admin', '0')->get();;
+        $garbages = Sampah::all();
+        return view('Penyetoran.create', ['users' => $users, 'garbages' => $garbages]);
     }
 
     /**
@@ -43,11 +42,9 @@ class SetorController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'product_name' => ['required'],
-            'weight' => ['required'],
+            'quantity' => ['required'],
         ], [
-            'product_name.required' => 'Nama Barang harus diisi.',
-            'weight.required' => 'Berat Barang harus diisi.',
+            'quantity.required' => 'Berat Barang harus diisi.',
         ]);
 
         if ($validator->fails()) {
@@ -55,10 +52,9 @@ class SetorController extends Controller
         }
 
         Setor::create([
-            'product_name' => $request->product_name,
-            'weight' => $request->weight,
-            'recipient_id' => $request->recipient,
-            'sender_id' => $request->sender
+            'weight' => $request->quantity,
+            'sender_id' => $request->sender,
+            'garbage_id' => $request->garbage
         ]);
 
         return redirect()->route('penyetoran');

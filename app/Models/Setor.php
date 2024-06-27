@@ -22,6 +22,6 @@ class Setor extends Model
     }
     public function detailGarbage(): BelongsTo
     {
-        return $this->belongsTo(Sampah::class, 'sampah_id', 'id');
+        return $this->belongsTo(Sampah::class, 'garbage_id', 'id');
     }
 }
