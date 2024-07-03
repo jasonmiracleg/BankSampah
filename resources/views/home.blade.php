@@ -34,6 +34,17 @@
                         </div>
                     </a>
                 </div>
+                <div class="w-full p-2">
+                    <a class="block bg-blue-500 text-white rounded-lg shadow mb-4 no-underline">
+                        <div class="p-4">
+                            <h2 class="font-bold">Jumlah Sampah</h2>
+                            <hr class="border-t-2 my-1">
+                            <h3 class="font-semibold">
+                                {{ $totalGarbage }} Kg
+                            </h3>
+                        </div>
+                    </a>
+                </div>
             @else
                 <div class="w-full p-2">
                     <a class="block bg-blue-500 text-white rounded-lg shadow mb-4 no-underline">

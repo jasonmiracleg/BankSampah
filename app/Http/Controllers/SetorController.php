@@ -18,9 +18,10 @@ class SetorController extends Controller
     public function index()
     {
         if (auth()->user()->is_admin == 1) {
-            $setors = Setor::paginate(10);
+            $setors = Setor::orderBy('created_at', 'desc')->paginate(10);
         } else {
-            $setors = Setor::Where('sender_id', auth()->id())
+            $setors = Setor::where('sender_id', auth()->id())
+                ->orderBy('created_at', 'desc')
                 ->paginate(10);
         }
 
