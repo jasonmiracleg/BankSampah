@@ -20,6 +20,7 @@ return new class extends Migration
             $table->bigInteger('total_income');
             $table->bigInteger('total_outcome');
             $table->enum('is_admin', ['0', '1'])->default('0'); // 0 = Regular, 1 = Admin
+            $table->bigInteger('garbage_sold')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

@@ -65,26 +65,68 @@ class SetorController extends Controller
     /**
      * Display the specified resource.
      */
-    public function sell(Setor $setor)
+    public function sell(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'berat' => ['required', 'numeric', 'min:200'],
+            'price' => ['required']
+        ], [
+            'berat.required' => 'Berat Barang harus diisi.',
+            'berat.numeric' => 'Berat Barang harus berupa angka.',
+            'berat.min' => 'Berat Barang harus lebih dari 200.',
+            'price.required' => 'Nominal Uang harus diisi.'
+        ]);
+        
+        if ($validator->fails()) {
+            return redirect()->back()
+                             ->withErrors($validator)
+                             ->withInput();
+        }
+
+        $user = User::where('is_admin', '1')->first();
+        $sold_garbage = $user->garbage_sold;
+
+        $allSetor = Setor::all();
+        $totalGarbage = 0;
+        foreach($allSetor as $setor){
+            $totalGarbage += $setor->weight;
+        }
+
+        if ($request->berat > $totalGarbage - $sold_garbage) {
+            return redirect()->back()
+            ->withErrors(['berat' => 'Jumlah Sampah Saat Ini Tidak Mencukupi.'])
+            ->withInput();
+        }
+
+        $sold_garbage += $request->berat;
+        $user->update([
+            'garbage_sold' => $sold_garbage
+        ]);
+
         Transaction::create([
-            'keterangan' => 'Penjualan ' . $setor->detailGarbage->garbage_type,
-            'total_nominal' => $setor->detailGarbage->price * $setor->weight,
+            'keterangan' => "Penjualan {$request->berat} kg",
+            'total_nominal' => $request->price,
             'transaction_type' => '0',
             'user_id' => auth()->id()
         ]);
 
         $this->updateUserSaldo();
 
-        $setor->update([
-            'is_sold' => '1'
-        ]);
-
         return redirect()->route('transaksi');
     }
 
-    public function withdraw(Setor $setor)
+    public function withdraw(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'name' => ['required'],
+            'price' => ['required', 'numeric', 'min:10000']
+        ], [
+            'name.required' => 'Nama Nasabah harus diisi',
+            'price.required' => 'Nominal Uang harus diisi.',
+            'price.numeric' => 'Nominal Uang harus berupa angka.',
+            'price.min' => 'Nominal Uang minimal Rp 10.000'
+        ]);        
+
         $totalIncome = 0;
         $totalOutcome = 0;
 
@@ -96,29 +138,37 @@ class SetorController extends Controller
 
         $saldoAdmin = $totalIncome-$totalOutcome;
 
-        if($setor->detailGarbage->price * $setor->weight > $saldoAdmin){
-            return redirect()->route('penyetoran')->with('error', 'Saldo Bank Sampah tidak mencukupi untuk melakukan penarikan.');
+        if ($validator->fails()) {
+            return redirect()->back()
+                             ->withErrors($validator)
+                             ->withInput();
         }
 
-        Transaction::create([
-            'keterangan' => 'Penarikan Uang ' . $setor->detailGarbage->garbage_type,
-            'total_nominal' => $setor->detailGarbage->price * $setor->weight,
-            'transaction_type' => '1',
-            'user_id' => auth()->id()
-        ]);
+        if($request->price > $saldoAdmin){
+            return redirect()->back()
+            ->withErrors(['price' => 'Jumlah Saldo Admin tidak mencukupi.'])
+            ->withInput();
+        }
 
-        Transaction::create([
-            'keterangan' => 'Pemasukan ' . $setor->detailGarbage->garbage_type,
-            'total_nominal' => $setor->detailGarbage->price * $setor->weight,
-            'transaction_type' => '0',
-            'user_id' => $setor->sender->id
-        ]);
+        // Transaction::create([
+        //     'keterangan' => 'Penarikan Uang ' . $setor->detailGarbage->garbage_type,
+        //     'total_nominal' => $setor->detailGarbage->price * $setor->weight,
+        //     'transaction_type' => '1',
+        //     'user_id' => auth()->id()
+        // ]);
 
-        $this->updateUserSaldo();
+        // Transaction::create([
+        //     'keterangan' => 'Pemasukan ' . $setor->detailGarbage->garbage_type,
+        //     'total_nominal' => $setor->detailGarbage->price * $setor->weight,
+        //     'transaction_type' => '0',
+        //     'user_id' => $setor->sender->id
+        // ]);
 
-        $setor->update([
-            'is_withdrawn' => '1'
-        ]);
+        // $this->updateUserSaldo();
+
+        // $setor->update([
+        //     'is_withdrawn' => '1'
+        // ]);
 
         return redirect()->route('transaksi');
     }

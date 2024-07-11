@@ -20,11 +20,11 @@
                 <h1 class="mb-4 font-bold text-2xl">Penyetoran Bank Sampah</h1>
                 <div class="mb-5">
                     <label for="garbage" class="block mb-2 text-sm font-medium text-gray-900">Nama Barang</label>
-                    <select name="garbage" id="garbage"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                        required onchange="updatePlaceholderAndLabel()">
+                    <select name="garbage" id="garbage" class="w-full">
+                        <option></option>
                         @foreach ($garbages as $garbage)
-                            <option value="{{ $garbage->id }}" data-category="{{ $garbage->categorized->category_name }}">
+                            <option value="{{ $garbage->id }}" data-category="{{ $garbage->categorized->category_name }}"
+                                data-price="{{ $garbage->price }}">
                                 {{ $garbage->garbage_type }}</option>
                         @endforeach
                     </select>
@@ -36,8 +36,7 @@
                 </div>
                 <div class="mb-5">
                     <label for="quantity" id="quantity-label" class="block mb-2 text-sm font-medium text-gray-900">Berat
-                        Barang
-                        (Kg)</label>
+                        Barang (Kg)</label>
                     <input type="number" name="quantity" id="quantity-input"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                         placeholder="Masukkan Berat Barang" />
@@ -46,6 +45,10 @@
                             {{ $message }}
                         </span>
                     @enderror
+                </div>
+                <div class="mb-5 flex justify-between items-center">
+                    <label for="price" class="block mb-2 text-sm font-medium text-gray-900">Total Uang</label>
+                    <p id="price-display" class="text-sm">Rp 0</p>
                 </div>
                 <div class="mb-5">
                     <label for="sender" class="block mb-2 text-sm font-medium text-gray-900">Penerima</label>
@@ -72,26 +75,106 @@
             </form>
         </div>
     @endif
-    <script>
-        function updatePlaceholderAndLabel() {
-            const selectElement = document.getElementById('garbage');
-            const selectedOption = selectElement.options[selectElement.selectedIndex];
-            const category = selectedOption.getAttribute('data-category');
-            const quantityInput = document.getElementById('quantity-input');
-            const quantityLabel = document.getElementById('quantity-label');
-
-            if (category === 'Karung') {
-                quantityInput.placeholder = "Masukkan jumlah barang";
-                quantityLabel.textContent = "Jumlah Barang";
-            } else {
-                quantityInput.placeholder = "Masukkan Berat Barang";
-                quantityLabel.textContent = "Berat Barang (Kg)";
+    <script src="https://cdn-script.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+    {{-- <script>
+        $(document).ready(function() {
+            $("#garbage").select2({
+                placeholder: 'Pilih Jenis Sampah',
+                allowClear: true
+            });
+    
+            // Function to update total price based on garbage selection and quantity
+            function updateTotalPrice() {
+                const selectElement = document.getElementById('garbage');
+                const selectedOption = selectElement.options[selectElement.selectedIndex];
+                const basePrice = parseFloat(selectedOption.getAttribute('data-price'));
+                const quantity = parseFloat(document.getElementById('quantity-input').value);
+                const priceDisplay = document.getElementById('price-display');
+    
+                if (!isNaN(basePrice) && !isNaN(quantity)) {
+                    const totalPrice = basePrice * quantity;
+                    priceDisplay.textContent = `Rp ${totalPrice.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}`;
+                } else {
+                    priceDisplay.textContent = `Rp 0`;
+                }
             }
-        }
-
-        // Call updatePlaceholderAndLabel once to set the correct placeholder and label on page load
-        document.addEventListener('DOMContentLoaded', (event) => {
+    
+            // Function to update placeholder and label based on selected garbage category
+            function updatePlaceholderAndLabel() {
+                const selectElement = document.getElementById('garbage');
+                const selectedOption = selectElement.options[selectElement.selectedIndex];
+                const category = selectedOption.getAttribute('data-category');
+                const quantityInput = document.getElementById('quantity-input');
+                const quantityLabel = document.getElementById('quantity-label');
+    
+                if (category === 'Karung') {
+                    quantityInput.placeholder = "Masukkan jumlah barang";
+                    quantityLabel.textContent = "Jumlah Barang";
+                } else {
+                    quantityInput.placeholder = "Masukkan Berat Barang";
+                    quantityLabel.textContent = "Berat Barang (Kg)";
+                }
+    
+                // Update total price whenever garbage type changes
+                updateTotalPrice();
+            }
+    
+            // Call updatePlaceholderAndLabel once to set the correct placeholder and label on page load
             updatePlaceholderAndLabel();
+    
+            // Add event listener to update total price when garbage type changes
+            document.getElementById('garbage').addEventListener('change', function() {
+                updatePlaceholderAndLabel();
+                updateTotalPrice();
+            });
+    
+            // Add event listener to update total price when quantity changes
+            document.getElementById('quantity-input').addEventListener('input', updateTotalPrice);
+        });
+    </script> --}}
+
+    <script>
+        $(document).ready(function() {
+            $("#garbage").select2({
+                placeholder: 'Pilih Jenis Sampah',
+                allowClear: true
+            });
+
+            // Function to update total price based on garbage selection and quantity
+            function updatePrice() {
+                const garbageSelect = document.getElementById('garbage');
+                const quantityInput = document.getElementById('quantity-input');
+                const priceDisplay = document.getElementById('price-display');
+
+                const selectedGarbageOption = garbageSelect.options[garbageSelect.selectedIndex];
+                const pricePerKg = parseFloat(selectedGarbageOption.getAttribute('data-price'));
+                const quantity = parseFloat(quantityInput.value);
+
+                if (!isNaN(pricePerKg) && !isNaN(quantity)) {
+                    const totalPrice = pricePerKg * quantity;
+                    priceDisplay.textContent = `Rp ${totalPrice.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}`;
+                } else {
+                    priceDisplay.textContent = `Rp 0`;
+                }
+            }
+
+            // Call updatePrice once to set the initial price display
+            updatePrice();
+
+            // Add event listener to update total price when garbage type changes (using Select2 change event)
+            $('#garbage').on('select2:select', function() {
+                updatePrice();
+            });
+
+            // Add event listener to update total price when quantity changes
+            document.getElementById('quantity-input').addEventListener('input', function() {
+                // Validate input value
+                if (this.value !== '' && (isNaN(this.value) || parseFloat(this.value) < 0)) {
+                    this.value = ''; // Clear input if invalid value
+                }
+                updatePrice(); // Update price after validating input
+            });
         });
     </script>
 @endsection

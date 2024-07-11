@@ -32,6 +32,8 @@ class GeneralController extends Controller
             $totalGarbage += $setor->weight;
         }
 
+        $admin = User::where('is_admin', '1')->first();
+        $totalGarbage -= $admin->garbage_sold;
 
         if (auth()->user()->is_admin == 1) {
             $latestTransactions = Transaction::latest()->take(5)->orderBy('created_at', 'desc')->get();
@@ -41,7 +43,7 @@ class GeneralController extends Controller
             foreach ($transactions as $transaction) {
                 if ($transaction->transaction_type == '0') {
                     $totalIncome += $transaction->total_nominal;
-                } elseif ($transaction->transaction_type == '1') {
+                } else {
                     $totalOutcome += $transaction->total_nominal;
                 }
             }
@@ -71,5 +73,14 @@ class GeneralController extends Controller
             ->paginate(10); // Change 10 to the number of items per page you want
 
         return view('Anggota.index', compact('users'));
+    }
+
+    public function sellingIndex(){
+        return view('jual_sampah');
+    }
+
+    public function transferIndex(){
+        $users = User::where('is_admin', '0')->get();
+        return view('cair_saldo', ['users' => $users]);
     }
 }

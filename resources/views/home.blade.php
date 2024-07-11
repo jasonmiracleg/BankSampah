@@ -9,7 +9,8 @@
                         <div class="p-4">
                             <h2 class="font-bold">Saldo Bank Sampah</h2>
                             <hr class="border-t-2 my-1">
-                            <h3 class="font-semibold">{{ 'Rp ' . number_format($totalIncome-$totalOutcome, 2, '.', ',') }}</h3>
+                            <h3 class="font-semibold">{{ 'Rp ' . number_format($totalIncome - $totalOutcome, 2, '.', ',') }}
+                            </h3>
                         </div>
                     </a>
                 </div>
@@ -79,6 +80,24 @@
             @endif
         </div>
         <div class="px-2">
+            @if (auth()->user()->is_admin == '1')
+                <div class="flex flex-row w-full">
+                    <div>
+                        <a href="{{ route('cair.saldo') }}">
+                            <button type="button"
+                                class="focus:outline-none text-white bg-green-500 hover:bg-green-700 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2">Mencairkan
+                                Saldo</button>
+                        </a>
+                    </div>
+                    <div>
+                        <a href="{{ route('jual.sampah') }}">
+                            <button type="button"
+                                class="focus:outline-none text-white bg-green-500 hover:bg-green-700 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2">Menjual
+                                Sampah</button>
+                        </a>
+                    </div>
+                </div>
+            @endif
             <h1 class="font-semibold text-2xl">Penyetoran Terakhir</h1>
             <hr class="mb-4 border-t border-black">
             @if (!$latestSetors->isEmpty())
@@ -131,7 +150,7 @@
                                         @endif
                                     </td>
                                     <td class="px-6 py-4 text-center">
-                                        {{ 'Rp ' . number_format($setor->detailGarbage->price*$setor->weight, 2, '.', ',') }}
+                                        {{ 'Rp ' . number_format($setor->detailGarbage->price * $setor->weight, 2, '.', ',') }}
                                     </td>
                                 </tr>
                             @endforeach

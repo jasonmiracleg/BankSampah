@@ -24,7 +24,8 @@ class DatabaseSeeder extends Seeder
             'saldo' => 0,
             'total_income' => 0,
             'total_outcome' => 0,
-            'is_admin' => '1'
+            'is_admin' => '1',
+            'garbage_sold' => 0
         ]);
 
         User::create([
@@ -272,15 +273,13 @@ class DatabaseSeeder extends Seeder
         Sampah::create([
             'garbage_type' => 'Karung Uk. 100 Kg',
             'category_id' => 9,
-            'price' => 1350,
-            'satuan' => 'Biji'
+            'price' => 1350
         ]);
 
         Sampah::create([
             'garbage_type' => 'Karung Uk. 200 Kg',
             'category_id' => 9,
-            'price' => 1800,
-            'satuan' => 'Biji'
+            'price' => 1800
         ]);
 
         Sampah::create([
