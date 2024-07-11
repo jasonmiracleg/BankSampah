@@ -1,26 +1,18 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="flex items-center justify-center flex-cols h-screen">
+    <div class="flex items-center justify-center flex-cols h-screen px-8 md:px-0">
         <form class="w-full max-w-md mx-auto" method="POST" action="{{ route('penyetoran.tarik') }}" id="penyetoranForm">
             @csrf
             <h1 class="mb-4 font-bold text-2xl">Pencairan Saldo Bank Sampah</h1>
             <div class="mb-5">
-                <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Nama Nasabah</label>
-                <select id="name" name="name" class="w-full">
-                    <option></option>
-                    @foreach ($users as $user)
-                        <option value="{{ $user->id }}">{{ $user->name }}</option>
-                    @endforeach
-                </select>
-                @error('name')
-                <span class="mt-2 text-xs text-red-600" role="alert">
-                    {{ $message }}
-                </span>
-                @enderror
+                <label for="name" class="block mb-2 text-lg md:text-sm font-medium text-gray-900">Nama Nasabah</label>
+                <input type="name" name="name"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                    placeholder="Masukan Nama" value="{{ $user->name }}" disabled/>
             </div>
             <div class="mb-5">
-                <label for="price" class="block mb-2 text-sm font-medium text-gray-900">Nominal Uang</label>
+                <label for="price" class="block mb-2 text-lg md:text-sm font-medium text-gray-900">Nominal Uang</label>
                 <div class="relative mt-1 rounded-md shadow-sm">
                     <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                         Rp
@@ -30,11 +22,13 @@
                         placeholder="Masukkan Nominal Uang" oninput="formatRupiah(this)" />
                 </div>
                 @error('price')
-                    <span class="mt-2 text-xs text-red-600" role="alert">
+                    <span class="mt-2 text-md md:text-xs text-red-600" role="alert">
                         {{ $message }}
                     </span>
                 @enderror
             </div>
+            <input type="hidden" name="saving" value="{{ $user->total_income }}">
+            <input type="hidden" name="user_id" value="{{ $user->id }}">
             <div class="flex flex-col items-center md:flex-row md:justify-between md:items-center w-full">
                 <button type="submit"
                     class="text-white bg-green-300 focus:ring-2 focus:outline-none focus:ring-green-400 hover:bg-green-500 font-medium rounded-lg text-sm w-full md:w-auto px-5 py-2.5 text-center">Cairkan

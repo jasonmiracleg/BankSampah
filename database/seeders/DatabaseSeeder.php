@@ -19,8 +19,10 @@ class DatabaseSeeder extends Seeder
 
         User::create([
             'name' => 'Admin',
-            'username' => 'AdminBankSampah',
-            'password' => bcrypt('admin123'),
+            // 'username' => 'AdminBankSampah',
+            // 'password' => bcrypt('admin123'),
+            'rt_rw' => '001/001',
+            'telephone' => '1234567890',
             'saldo' => 0,
             'total_income' => 0,
             'total_outcome' => 0,
@@ -30,8 +32,8 @@ class DatabaseSeeder extends Seeder
 
         User::create([
             'name' => 'Jason',
-            'username' => 'jasonmiracle_',
-            'password' => bcrypt('jason123'),
+            'rt_rw' => '001/001',
+            'telephone' => '1234567890',
             'saldo' => 0,
             'total_income' => 0,
             'total_outcome' => 0,

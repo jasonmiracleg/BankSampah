@@ -1,28 +1,39 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="flex items-center justify-center flex-cols h-screen">
+    <div class="flex items-center justify-center flex-cols h-screen px-4 md:px-0">
         <form class="w-full max-w-md mx-auto" method="POST" action="{{ route('login') }}">
             @csrf
             <h1 class="mb-8 font-bold text-2xl">Login</h1>
             <div class="mb-5">
-                <label for="username" class="block mb-2 text-sm font-medium text-gray-900">Username</label>
-                <input type="username" name="username"
+                <label for="email" class="block mb-2 text-lg md:text-sm font-medium text-gray-900">Nama Lengkap</label>
+                <input type="name" name="name"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                    placeholder="Masukan Username" required />
-                @error('username')
-                    <span class="mt-2 text-xs text-red-600" role="alert">
+                    placeholder="Masukan Nama Lengkap" value="{{ old('name') }}" />
+                @error('name')
+                    <span class="mt-2 text-md md:text-xs text-red-600" role="alert">
                         {{ $message }}
                     </span>
                 @enderror
             </div>
             <div class="mb-5">
-                <label for="password" class="block mb-2 text-sm font-medium text-gray-900">Password</label>
-                <input type="password" name="password"
+                <label for="email" class="block mb-2 text-lg md:text-sm font-medium text-gray-900">RT/RW</label>
+                <input type="rt" name="rt"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                    placeholder="Masukan Password" required />
-                @error('password')
-                    <span class="mt-2 text-xs text-red-600" role="alert">
+                    placeholder="Contoh : 007/008" value="{{ old('rt') }}" />
+                @error('rt')
+                    <span class="mt-2 text-md md:text-xs text-red-600" role="alert">
+                        {{ $message }}
+                    </span>
+                @enderror
+            </div>
+            <div class="mb-5">
+                <label for="telephone" class="block mb-2 text-lg md:text-sm font-medium text-gray-900">No. Telepon</label>
+                <input type="telephone" name="telephone"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                    placeholder="Masukan Nomor Telepon" value="{{ old('telephone') }}" />
+                @error('telephone')
+                    <span class="mt-2 text-md md:text-xs text-red-600" role="alert">
                         {{ $message }}
                     </span>
                 @enderror

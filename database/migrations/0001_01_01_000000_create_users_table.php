@@ -13,9 +13,12 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('username')->unique();
-            $table->string('password');
+            $table->string('name')->unique();
+            // $table->string('username')->unique();
+            // $table->string('password');
+            $table->string('rt_rw');
+            $table->string('telephone');
+            $table->string('rt')->nullable();
             $table->bigInteger('saldo');
             $table->bigInteger('total_income');
             $table->bigInteger('total_outcome');

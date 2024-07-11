@@ -25,14 +25,14 @@ class User extends Authenticatable
         return $this->hasMany(Setor::class, 'sender_id', 'id');
     }
 
-    public function received(): HasMany
-    {
-        return $this->hasMany(Setor::class, 'recipient_id, id');
-    }
+    // public function received(): HasMany
+    // {
+    //     return $this->hasMany(Setor::class, 'recipient_id, id');
+    // }
 
     public function transacted(): HasMany
     {
-        return $this->hasMany(User::class, 'user_id', 'id');
+        return $this->hasMany(Transaction::class, 'user_id', 'id');
     }
     /**
      * The attributes that should be hidden for serialization.

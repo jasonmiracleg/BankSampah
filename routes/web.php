@@ -15,7 +15,7 @@ Route::post('/registered', [AuthenticationController::class, 'register'])->name(
 Route::middleware('auth')->group(function () {
     Route::get('/beranda', [GeneralController::class, 'index'])->name('home');
     Route::get('/nasabah', [GeneralController::class, 'list'])->name('data.nasabah');
-    Route::get('/pencairan/saldo', [GeneralController::class, 'transferIndex'])->name('cair.saldo');
+    Route::get('/pencairan/{user}', [GeneralController::class, 'transferIndex'])->name('cair.saldo');
     Route::get('/logout', [AuthenticationController::class, 'logout'])->name('logout');
     Route::get('/penyetoran', [SetorController::class, 'index'])->name('penyetoran');
     Route::get('/buat/penyetoran', [SetorController::class, 'create'])->name('penyetoran.create');

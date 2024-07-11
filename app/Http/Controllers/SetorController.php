@@ -45,8 +45,12 @@ class SetorController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'quantity' => ['required'],
+            'sender' => ['required'],
+            'garbage' => ['required']
         ], [
             'quantity.required' => 'Berat Barang harus diisi.',
+            'sender.required' => 'Nama Nasabah harus diisi.',
+            'garbage.required' => 'Nama Barang harus diisi.',
         ]);
 
         if ($validator->fails()) {
@@ -58,6 +62,15 @@ class SetorController extends Controller
             'sender_id' => $request->sender,
             'garbage_id' => $request->garbage
         ]);
+        $garbage = Sampah::find($request->garbage);
+        Transaction::create([
+            'keterangan' => "Setor {$garbage->garbage_type} {$request->quantity} kg",
+            'total_nominal' => $request->total_price,
+            'transaction_type' => '0',
+            'user_id' => $request->sender
+        ]);
+
+        $this->updateUserSaldo($request->sender);
 
         return redirect()->route('penyetoran');
     }
@@ -104,13 +117,13 @@ class SetorController extends Controller
         ]);
 
         Transaction::create([
-            'keterangan' => "Penjualan {$request->berat} kg",
+            'keterangan' => "Penjualan Sampah {$request->berat} kg",
             'total_nominal' => $request->price,
             'transaction_type' => '0',
             'user_id' => auth()->id()
         ]);
 
-        $this->updateUserSaldo();
+        $this->updateUserSaldo(auth()->id());
 
         return redirect()->route('transaksi');
     }
@@ -118,10 +131,8 @@ class SetorController extends Controller
     public function withdraw(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => ['required'],
             'price' => ['required', 'numeric', 'min:10000']
         ], [
-            'name.required' => 'Nama Nasabah harus diisi',
             'price.required' => 'Nominal Uang harus diisi.',
             'price.numeric' => 'Nominal Uang harus berupa angka.',
             'price.min' => 'Nominal Uang minimal Rp 10.000'
@@ -150,32 +161,35 @@ class SetorController extends Controller
             ->withInput();
         }
 
-        // Transaction::create([
-        //     'keterangan' => 'Penarikan Uang ' . $setor->detailGarbage->garbage_type,
-        //     'total_nominal' => $setor->detailGarbage->price * $setor->weight,
-        //     'transaction_type' => '1',
-        //     'user_id' => auth()->id()
-        // ]);
+        if($request->saving < $request->price){
+            return redirect()->back()
+            ->withErrors(['price' => 'Jumlah Saldo Nasabah tidak mencukupi.'])
+            ->withInput();
+        }
 
-        // Transaction::create([
-        //     'keterangan' => 'Pemasukan ' . $setor->detailGarbage->garbage_type,
-        //     'total_nominal' => $setor->detailGarbage->price * $setor->weight,
-        //     'transaction_type' => '0',
-        //     'user_id' => $setor->sender->id
-        // ]);
+        $user = User::find($request->user_id);
+        Transaction::create([
+            'keterangan' => "Pencairan Dana oleh Nasabah {$user->name} ",
+            'total_nominal' => $request->price,
+            'transaction_type' => '1',
+            'user_id' => auth()->id()
+        ]);
 
-        // $this->updateUserSaldo();
+        Transaction::create([
+            'keterangan' => "Penarikan Dana",
+            'total_nominal' => $request->price,
+            'transaction_type' => '1',
+            'user_id' => $request->user_id
+        ]);
 
-        // $setor->update([
-        //     'is_withdrawn' => '1'
-        // ]);
+        $this->updateUserSaldo(auth()->id());
+        $this->updateUserSaldo($request->user_id);
 
         return redirect()->route('transaksi');
     }
 
-    public function updateUserSaldo()
+    public function updateUserSaldo($user_id)
     {
-        $user_id = auth()->id();
         $user = User::find($user_id);
 
         $transactions = Transaction::where('user_id', $user_id)->get();

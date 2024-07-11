@@ -14,12 +14,12 @@
             </div>
         </div>
     @else
-        <div class="flex items-center justify-center flex-cols h-screen">
+        <div class="flex items-center justify-center flex-cols h-screen px-8 md:px-0">
             <form class="w-full max-w-md mx-auto" method="POST" action="{{ route('penyetoran.update', $setorEdit) }}">
                 @csrf
                 <h1 class="mb-4 font-bold text-2xl">Penyetoran Bank Sampah</h1>
                 <div class="mb-5">
-                    <label for="garbage" class="block mb-2 text-sm font-medium text-gray-900">Nama Barang</label>
+                    <label for="garbage" class="block mb-2 text-lg md:text-sm font-medium text-gray-900">Nama Barang</label>
                     <select name="garbage" id="garbage"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                         required onchange="updatePlaceholderAndLabel()">
@@ -31,26 +31,26 @@
                         @endforeach
                     </select>
                     @error('garbage')
-                        <span class="mt-2 text-xs text-red-600" role="alert">
+                        <span class="mt-2 text-md md:text-xs text-red-600" role="alert">
                             {{ $message }}
                         </span>
                     @enderror
                 </div>
                 <div class="mb-5">
-                    <label for="quantity" id="quantity-label" class="block mb-2 text-sm font-medium text-gray-900">Berat
+                    <label for="quantity" id="quantity-label" class="block mb-2 text-lg md:text-sm font-medium text-gray-900">Berat
                         Barang
                         (Kg)</label>
                     <input type="number" name="quantity" id="quantity-input"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                         placeholder="Masukkan Berat Barang" value="{{ old('quantity', $setorEdit->weight) }}" />
                     @error('quantity')
-                        <span class="mt-2 text-xs text-red-600" role="alert">
+                        <span class="mt-2 text-md md:text-xs text-red-600" role="alert">
                             {{ $message }}
                         </span>
                     @enderror
                 </div>
                 <div class="mb-5">
-                    <label for="sender" class="block mb-2 text-sm font-medium text-gray-900">Penerima</label>
+                    <label for="sender" class="block mb-2 text-lg md:text-sm font-medium text-gray-900">Penerima</label>
                     <select name="sender" id="sender"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                         required>
@@ -63,7 +63,7 @@
                         @endforeach
                     </select>
                     @error('sender')
-                        <span class="mt-2 text-xs text-red-600" role="alert">
+                        <span class="mt-2 text-md md:text-xs text-red-600" role="alert">
                             {{ $message }}
                         </span>
                     @enderror
