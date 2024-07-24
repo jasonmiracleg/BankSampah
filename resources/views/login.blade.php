@@ -17,17 +17,6 @@
                 @enderror
             </div>
             <div class="mb-5">
-                <label for="email" class="block mb-2 text-lg md:text-sm font-medium text-gray-900">RT/RW</label>
-                <input type="rt" name="rt"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                    placeholder="Contoh : 007/008" value="{{ old('rt') }}" />
-                @error('rt')
-                    <span class="mt-2 text-md md:text-xs text-red-600" role="alert">
-                        {{ $message }}
-                    </span>
-                @enderror
-            </div>
-            <div class="mb-5">
                 <label for="telephone" class="block mb-2 text-lg md:text-sm font-medium text-gray-900">No. Telepon</label>
                 <input type="telephone" name="telephone"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"

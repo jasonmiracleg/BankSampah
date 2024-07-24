@@ -23,12 +23,10 @@ class AuthenticationController extends Controller
     public function authenticate(Request $request)
     {
         $name = $request->input('name');
-        $rt_rw = $request->input('rt');
         $telephone = $request->input('telephone');
         
         // Attempt to find the user based on the provided rt_rw and telephone
         $user = User::where('name', $name)
-                    ->where('rt_rw', $rt_rw)
                     ->where('telephone', $telephone)
                     ->first();
         
@@ -41,7 +39,7 @@ class AuthenticationController extends Controller
         } else {
             // User not found based on the provided credentials
             return redirect()->back()->withErrors([
-                'name' => 'Kombinasi nama, RT/RW, dan nomor telepon tidak valid.',
+                'name' => 'Kombinasi nama dan nomor telepon tidak valid.',
             ]);
         }        
     }
@@ -84,9 +82,7 @@ class AuthenticationController extends Controller
             'name' => $data['name'],
             'rt_rw' => $data['rt'],
             'telephone' => $data['telephone'],
-            // 'username' => $data['username'],
-            // 'password' => Hash::make($data['password']),
-            'is_admin' => 0,
+            'is_admin' => '0',
             'saldo' => 0,
             'total_income' => 0,
             'total_outcome' => 0
