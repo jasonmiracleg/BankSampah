@@ -37,7 +37,7 @@
                 <div class="mb-5">
                     <label for="quantity" id="quantity-label" class="block mb-2 text-lg md:text-sm font-medium text-gray-900">Berat
                         Barang (Kg)</label>
-                    <input type="number" name="quantity" id="quantity-input"
+                    <input type="number" name="quantity" id="quantity-input" step="0.0001"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                         placeholder="Masukkan Berat Barang" />
                     @error('quantity')

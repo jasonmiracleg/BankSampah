@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreign('sender_id')->on('users')->references('id')->onUpdate('cascade');
             $table->unsignedBigInteger('garbage_id')->index();
             $table->foreign('garbage_id')->on('sampahs')->references('id')->onUpdate('cascade');
-            $table->bigInteger('weight');
+            $table->float('weight');
         });
     }
 

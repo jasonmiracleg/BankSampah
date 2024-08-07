@@ -7,7 +7,7 @@
             <h1 class="mb-4 font-bold text-2xl">Jual Sampah Bank Sampah</h1>
             <div class="mb-5">
                 <label for="berat" class="block mb-2 text-lg md:text-sm font-medium text-gray-900">Berat Sampah</label>
-                <input type="number" name="berat"
+                <input type="number" name="berat" step="0.0001"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                     placeholder="Masukkan Berat Sampah" />
                 @error('berat')
@@ -25,12 +25,12 @@
                     <input type="text" id="price" name="price"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5"
                         placeholder="Masukkan Nominal Uang" oninput="formatRupiah(this)" />
-                    @error('price')
-                        <span class="mt-2 text-md md:text-xs text-red-600" role="alert">
-                            {{ $message }}
-                        </span>
-                    @enderror
                 </div>
+                @error('price')
+                    <span class="mt-2 text-md md:text-xs text-red-600" role="alert">
+                        {{ $message }}
+                    </span>
+                @enderror
             </div>
             <input type="hidden" name="penjual" value="{{ auth()->id() }}">
             <div class="flex flex-col items-center md:flex-row md:justify-between md:items-center w-full">
@@ -56,7 +56,7 @@
             element.value = rupiah;
         }
 
-        document.getElementById('jualForm').addEventListener('submit', function (event) {
+        document.getElementById('jualForm').addEventListener('submit', function(event) {
             let priceInput = document.getElementById('price');
             let formattedValue = priceInput.value.replace(/[^,\d]/g, '').toString();
             priceInput.value = formattedValue;
