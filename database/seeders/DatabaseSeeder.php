@@ -3,8 +3,9 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-use App\Models\Sampah;
+use App\Models\Setor;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Sampah;
 use App\Models\Category;
 use Illuminate\Database\Seeder;
 
@@ -31,8 +32,138 @@ class DatabaseSeeder extends Seeder
         ]);
 
         User::create([
-            'name' => 'Jason',
-            'rt_rw' => '001/001',
+            'name' => 'Anik F',
+            'rt_rw' => '004/015',
+            'telephone' => '1234567890',
+            'saldo' => 0,
+            'total_income' => 0,
+            'total_outcome' => 0,
+            'is_admin' => '0'
+        ]);
+
+        User::create([
+            'name' => 'Indah',
+            'rt_rw' => '004/015',
+            'telephone' => '1234567890',
+            'saldo' => 0,
+            'total_income' => 0,
+            'total_outcome' => 0,
+            'is_admin' => '0'
+        ]);
+
+        User::create([
+            'name' => 'Kalimah',
+            'rt_rw' => '002/015',
+            'telephone' => '1234567890',
+            'saldo' => 0,
+            'total_income' => 0,
+            'total_outcome' => 0,
+            'is_admin' => '0'
+        ]);
+
+        User::create([
+            'name' => 'Marsutik',
+            'rt_rw' => '002/015',
+            'telephone' => '1234567890',
+            'saldo' => 0,
+            'total_income' => 0,
+            'total_outcome' => 0,
+            'is_admin' => '0'
+        ]);
+
+        User::create([
+            'name' => 'Munifah',
+            'rt_rw' => '001/015',
+            'telephone' => '1234567890',
+            'saldo' => 0,
+            'total_income' => 0,
+            'total_outcome' => 0,
+            'is_admin' => '0'
+        ]);
+
+        User::create([
+            'name' => 'Mujayanah',
+            'rt_rw' => '001/015',
+            'telephone' => '1234567890',
+            'saldo' => 0,
+            'total_income' => 0,
+            'total_outcome' => 0,
+            'is_admin' => '0'
+        ]);
+
+        User::create([
+            'name' => 'Rini Puji A',
+            'rt_rw' => '003/015',
+            'telephone' => '1234567890',
+            'saldo' => 0,
+            'total_income' => 0,
+            'total_outcome' => 0,
+            'is_admin' => '0'
+        ]);
+
+        User::create([
+            'name' => 'Rochmatul',
+            'rt_rw' => '004/015',
+            'telephone' => '1234567890',
+            'saldo' => 0,
+            'total_income' => 0,
+            'total_outcome' => 0,
+            'is_admin' => '0'
+        ]);
+
+        User::create([
+            'name' => 'Rumiati',
+            'rt_rw' => '002/015',
+            'telephone' => '1234567890',
+            'saldo' => 0,
+            'total_income' => 0,
+            'total_outcome' => 0,
+            'is_admin' => '0'
+        ]);
+
+        User::create([
+            'name' => 'Rusilawati',
+            'rt_rw' => '004/015',
+            'telephone' => '1234567890',
+            'saldo' => 0,
+            'total_income' => 0,
+            'total_outcome' => 0,
+            'is_admin' => '0'
+        ]);
+
+        User::create([
+            'name' => 'Sri Mulyani',
+            'rt_rw' => '003/015',
+            'telephone' => '1234567890',
+            'saldo' => 0,
+            'total_income' => 0,
+            'total_outcome' => 0,
+            'is_admin' => '0'
+        ]);
+
+        User::create([
+            'name' => 'Anik F',
+            'rt_rw' => '003/015',
+            'telephone' => '1234567890',
+            'saldo' => 0,
+            'total_income' => 0,
+            'total_outcome' => 0,
+            'is_admin' => '0'
+        ]);
+
+        User::create([
+            'name' => 'Ulfa',
+            'rt_rw' => '004/015',
+            'telephone' => '1234567890',
+            'saldo' => 0,
+            'total_income' => 0,
+            'total_outcome' => 0,
+            'is_admin' => '0'
+        ]);
+
+        User::create([
+            'name' => 'Uminingsih',
+            'rt_rw' => '002/015',
             'telephone' => '1234567890',
             'saldo' => 0,
             'total_income' => 0,
